@@ -10,7 +10,7 @@ busPic.addEventListener('dblclick', e  => {
   audioObj.pause();
 });
 
-// header background Change 
+// header  Changes/Stop Propogation/ Prevent Default
 const header = document.querySelector('header');
 
 header.addEventListener("auxclick", e => {
@@ -24,6 +24,15 @@ header.addEventListener("auxclick", e => {
   }
 });
 
+document.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('auxclick', (e) => {
+    e.stopPropagation();
+    link.style.color = 'orange';
+  });
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+  })
+});
 
 
 // page load sound
@@ -59,11 +68,25 @@ body.addEventListener('wheel', () => {
     pics[3].style.border = 'none';
   }); 
 
-  pics[3].addEventListener('keyup', (e) => {
+  document.addEventListener('keypress', (e) => {
     if (e.key === 'f') {
       pics[3].style.transform = 'rotate(2deg)';
     } else if (e.key === 'j') {
-      pics[3].style.transform = 'none'
+      pics[3].style.transform = 'none';
     }
   });
  
+// all image events 
+
+document.querySelectorAll('img').forEach((image) => {
+  image.addEventListener('mousedown', (e) => {
+    e.stopPropagation();
+    image.style.transform = 'scale(1.2)';
+  });
+  image.addEventListener('mouseup', (e) => {
+    e.stopPropagation();
+    image.style.transform = 'scale(1)';
+  });
+});
+
+
